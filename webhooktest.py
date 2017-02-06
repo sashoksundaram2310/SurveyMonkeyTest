@@ -6,6 +6,8 @@ import time
 
 YOUR_ACCESS_TOKEN = "DBFO7wTXGJgnUjIVlznq.25b3UTEUBWh.S0McNpPp577NGubDa3vrNsF8EZn.mCj1fChydsP2p0DZYGY.Nzxg8Y9MPc3xLcDIZcB7-FiDUZoqcyXnKETOpfUBRA9nW34"
 
+# this class contains all the web hook test cases
+# NOTE:  everytime the test is run, we have to make the subscription_url unique
 class TestWebhooks(unittest.TestCase):
 	
 	def setup_header(self):
@@ -52,7 +54,7 @@ class TestWebhooks(unittest.TestCase):
 		return r
 		
 	# webhooks post call response assertions
-	def atest_create_webhook(self):
+	def test_create_webhook(self):
 		print "test_01_create_webhook"
 		r = self.makeWebhookAndReturnResponse()
 		# print "After post"	
@@ -76,7 +78,7 @@ class TestWebhooks(unittest.TestCase):
 		# self.assertEquals(payload.subscription_url, r["subscription_url"])
 		# print "Asserted subscrition_url"
 
-	def atest_02_list_of_webhooks(self):
+	def test_02_list_of_webhooks(self):
 		r = self.makeWebhookAndReturnResponse()
 		createdWebhookId =  json.loads(r.text)["id"]
 		s02 = self.setup_header()
@@ -124,7 +126,7 @@ class TestWebhooks(unittest.TestCase):
 	# 	print lo
 	# 	self.assertEquals(lo,3)
 
-	def atest_03_getwebhookid(self):
+	def test_03_getwebhookid(self):
 		# step1 create survey(setup)
 		# step2 create webhook 
 		r = self.makeWebhookAndReturnResponse()
@@ -145,7 +147,7 @@ class TestWebhooks(unittest.TestCase):
 		self.assertEquals(createdObjectId, json.loads(callBack_text)["object_ids"])
 		print "pass: Asserted the created survey ID wih get/id response's Survey id"
 	
-	def atest_06_putWebhook(self):
+	def test_06_putWebhook(self):
 		# step1 create survey(setup)
 		# step2 create webhook 
 		r = self.makeWebhookAndReturnResponse()
@@ -190,7 +192,7 @@ class TestWebhooks(unittest.TestCase):
 		print "Pass: Asserted response of head api call to be http 204"
 		
 
-	def atest_delete(self):
+	def test_delete(self):
 
 		print "---------------Inside Delete ---------------"
 		r = self.makeWebhookAndReturnResponse()
